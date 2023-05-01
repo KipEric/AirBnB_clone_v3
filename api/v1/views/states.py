@@ -30,7 +30,7 @@ def create_state():
     """Function that create new state"""
     data = request.get_json()
     if not data:
-        abort(400,'Not a JSON')
+        abort(400, 'Not a JSON')
     if 'name' not in data:
         abort(400, 'Missing name')
     state = State(**data)
@@ -38,7 +38,7 @@ def create_state():
     return jsonify(state.to_dict()), 201
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'])
 def delete_state(state_id):
     """Function that delete state using state id"""
     state = storage.get(State, state_id)

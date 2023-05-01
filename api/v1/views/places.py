@@ -7,7 +7,7 @@ from models import storage, Place, User, City
 from api.v1.views import app_views
 
 
-@app_views.route('/cities/<city_id>/places', methods=['GET'], strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', methods=['GET'])
 def list_places(city_id):
     """Function that retrive all places"""
     city = storage.get(City, city_id)
@@ -26,7 +26,7 @@ def single_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route('/places/<place_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/places/<place_id>', methods=['DELETE'])
 def delete_place(place_id):
     """Function that delete a place"""
     place = storage.get(Place, place_id)
@@ -37,7 +37,7 @@ def delete_place(place_id):
     return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places', methods=['POST'], strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', methods=['POST'])
 def add_place(city_id):
     """Fundtion that add a places"""
     city = storage.get(City, city_id)

@@ -7,7 +7,7 @@ from api.v1.views import api_views
 from models import storage, State, City
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['GET'])
 def cities_by_state(state_id):
     """Function that retreves all cities in a state"""
     state = storage.get('State', state_id)
@@ -37,7 +37,7 @@ def delete_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['POST'])
 def add_city(state_id):
     """Function that add a city to a state"""
     state = storage.get('State', state_id)

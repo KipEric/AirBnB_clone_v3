@@ -9,7 +9,7 @@ from models.review import Review
 from models.place import Place
 
 
-@app_views.route('/places/<place_id>/reviews', methods=['GET'], strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', methods=['GET'])
 def list_reviews(place_id):
     """Function that list all the reviews"""
     place = storage.get(Place, place_id)
@@ -28,7 +28,7 @@ def single_review(review_id):
     return jsonify(review.to_dict())
 
 
-@app_views.route('/reviews/<review_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/reviews/<review_id>', methods=['DELETE'])
 def delete_review(review_id):
     """Function that delete a review object"""
     review = storage.get(Review, review_id)
@@ -39,7 +39,7 @@ def delete_review(review_id):
     return jsonify({})
 
 
-@app_views.route('/places/<place_id>/reviews', methods=['POST'], strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', methods=['POST'])
 def create_review(place_id):
     """Function that create a review"""
     place = storage.get(Place, place_id)

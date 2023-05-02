@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""Flask script"""
+"""api that calls close function"""
 
 
 from flask import Flask, jsonify, make_response, render_template, url_for
 from models import storage
-from os import getenv
 from api.v1.views import app_views
+<<<<<<< HEAD
 from flask_cors import CORS, cross_origin
 from flasgger import Swagger
 from werkzeug.exceptions import HTTPException
@@ -26,6 +26,23 @@ def tear_down(exception):
 
 @app.errorhandler(404)
 def page_not_found(exception):
+=======
+from os import getenv
+
+
+app = Flask(__name__)
+app.register_blueprint(app_views)
+
+
+@app.teardown_appcontext
+def downtear(self):
+    """function that return close"""
+    storage.close()
+
+
+@app.errorhandle(404)
+def page_not_found(error):
+>>>>>>> ef667198c1c6cb3fa3d4931e79fea2e778c9d91e
     """Function to handle error code 404"""
     code = exception.__str__().split()[0]
     description = exception.description

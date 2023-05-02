@@ -14,3 +14,13 @@ from api.v1.views.places_amenities import *
 
 
 app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+
+
+app_views.register_blueprint(index)
+app_views.register_blueprint(states)
+app_views.register_blueprint(places)
+app_views.register_blueprint(amenities)
+app_views.register_blueprint(cities)
+app_views.register_blueprint(users)
+app_views.register_blueprint(places_reviews)
+app_views.register_blueprint(places_amenities)

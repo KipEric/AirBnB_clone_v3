@@ -9,21 +9,27 @@ from api.v1.views import app_views
 
 
 
-@app_views.route('/status', strict_slashes=False)
-def stts():
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
+def status():
     """Method that return status of the api"""
-    return jsonify({"status": "OK"})
+    if request.method == 'GET':
+        resp = {"status": "OK"}
+        return jsonify(resp)
 
 
 @app_views.route('/api/v1/stats', strict_slashes=False)
 def stat():
     """Function that retrieves the number of each objects by type"""
+    if request.method == 'GET':
+        response = {}
     elem = {
-        'amenities': storage.count('models.Amenity'),
-        'cities': storage.count('models.City'),
-        'places': storage.count('models.Place'),
-        'reviews': storage.count('models.Review'),
-        'states': storage.count('models.State'),
-        'users': storage.count('models.User')
+        "Amenity": "amenities",
+        "City": "cities",
+        "Place": "places",
+        "State": "states",
+        "Review": "reviews",
+        "User": "users"
     }
-    return jsonify(elem)
+    for key, value in elem.items():
+        response[value] = storage.count(key)
+    return jsonify(response)
